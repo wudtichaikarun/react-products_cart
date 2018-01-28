@@ -16,17 +16,23 @@ class App extends Component {
  }
 
  changeBuy = (id, amount) => {
-   const { products } = this.state
-   const index = products.findIndex(product => product.id === id)
-   const product = products[index]
+  this.setState((prevState) => {
+    const { products } = prevState
+    const index = products.findIndex(product => product.id === id)
+    const product = products[index]
 
-    this.setState({
+    return {
       products: [
         ...products.slice(0, index),
         { ...product, buy: product.buy + amount },
         ...products.slice(index + 1)
       ]
-    })
+    }
+  })
+
+
+      
+
  }
 
  getAvailableProducts = () => {
