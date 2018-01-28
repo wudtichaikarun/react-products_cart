@@ -1,26 +1,25 @@
-import React, { Component } from 'react'
+import React from 'react'
+import Product from './Product'
 
-class Carts extends Component {
-  render() {
-    return (
-      <div className="card small-width">
-        <h5 className="card-header bg-primary text-white small-padding">Cart</h5>
-        {
-          this.props.carts.map(
-            (cart, index) => 
-            <form key={index}>
-              <div>
-                <span className="product-name">{cart.name}</span>
-                <span className="amount">9</span>
-              </div>
- 
-              <button className="btn btn-outline-primary">Remove</button> 
-            </form>
+const Carts = ({ products, onRemove }) => (
+  <div>
+    <ul className='list-group'>
+      <li className='list-group-item active'>Cart</li>
+      {
+        products.map(
+          ({ id, name, buy }) => (
+            <Product
+              key={id}
+              id={id}
+              name={name}
+              amount={buy}
+              onClick={onRemove}
+              btnTxt='Remove' />
           )
-        }
-      </div>
-    )
-  }
-}
+        )
+      }
+    </ul>
+  </div>
+)
 
 export default Carts

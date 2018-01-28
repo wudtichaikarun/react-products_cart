@@ -1,23 +1,25 @@
-import React, { Component } from 'react'
+import React from 'react'
+import Product from './Product'
 
-class Products extends Component {
-
-  render() {
-    return (
-      <div className="card small-width">
-      <h5 className="card-header bg-primary text-white small-padding">Product</h5>
-      {
-        this.props.products.map(
-          (product, index) => 
-          <form key={index}>
-            <p>{product.name}</p>
-            <button className="btn btn-outline-primary">Add to Cart</button>
-          </form>
-        )
-      }
-    </div>
-    )
-  }
-}
+const Products = ({ products, onAddToCart }) => (
+  <div>
+    <ul className='list-group'>
+     <li className='list-group-item active'>Products</li>
+     {
+       products.map(
+         ({id, name, amount, buy }) => (
+           <Product 
+            key={id}
+            id={id}
+            name={name}
+            amount={amount - buy}
+            onClick={onAddToCart}
+            btnTxt='Add to Cart' />
+         )
+       )
+     }
+    </ul>
+  </div>
+)
 
 export default Products
